@@ -1,0 +1,6 @@
+services:
+  exception_subscriber.event:
+    class: AppBundle\EventSubscriber\ExceptionSubscriber
+    arguments: ['@infra.json_response.service', '@monolog.logger.php']
+    tags:
+      - { name: kernel.event_subscriber }

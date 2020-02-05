@@ -1,0 +1,8 @@
+services:
+    app.person.service:
+        class: AppBundle\Service\PersonService
+        arguments: ['@person.repository']
+
+    app.shiporder.service:
+        class: AppBundle\Service\ShiporderService
+        arguments: ['@shiporder.repository']

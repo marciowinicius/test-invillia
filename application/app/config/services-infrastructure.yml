@@ -1,0 +1,15 @@
+services:
+  infra.json.service:
+    class: Infrastructure\Service\JsonService
+    arguments: ['@jms_serializer']
+
+  infra.json_response.service:
+    class: Infrastructure\Service\JsonResponseService
+    arguments: ['@infra.json.service']
+
+  infra.uploads.service:
+    class: Infrastructure\Service\UploadsService
+    arguments:
+      - '@app.person.service'
+      - '@app.shiporder.service'
+      - '@jms_serializer'

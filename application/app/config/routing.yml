@@ -1,0 +1,29 @@
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+fos_oauth_server_authorize:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+
+app_shiporders:
+    type: rest
+    resource: AppBundle\Controller\ShipordersController
+
+app_upload_shiporders:
+    type: rest
+    resource: AppBundle\Controller\UploadShipordersController
+
+app_people:
+    type: rest
+    resource: AppBundle\Controller\PeopleController
+
+app_upload_people:
+    type: rest
+    resource: AppBundle\Controller\UploadPeopleController
+
+app_uploads:
+    type: rest
+    resource: AppBundle\Controller\UploadsController

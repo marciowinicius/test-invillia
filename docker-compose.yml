@@ -1,0 +1,42 @@
+version: "3.3"
+
+services:
+    mysql:
+      image: mysql:5.7.22
+      container_name: symfony-mysql
+      restart: always
+      tty: true
+      volumes:
+        - ./tmp/shiporders.sql:/docker-entrypoint-initdb.d/shiporders.sql
+      ports:
+        - "3306:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=shiporders
+        - MYSQL_DATABASE=shiporders
+        - MYSQL_USER=shiporders
+        - MYSQL_PASSWORD=shiporders
+
+    webserver:
+      image: nginx:alpine
+      container_name: symfony-webserver
+      working_dir: /var/www/html
+      volumes:
+          - ./application:/var/www/html
+          - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
+      ports:
+        - "8000:80"
+
+    php-fpm:
+      build: docker/php-fpm
+      container_name: symfony-php-fpm
+      working_dir: /var/www/html
+      volumes:
+        - ./application:/var/www/html
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+
+    composer:
+      image: composer
+      container_name: symfony-composer
+      volumes:
+        - ./application:/app
+      command: install
